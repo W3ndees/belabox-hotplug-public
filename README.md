@@ -78,6 +78,8 @@ restarted.
 ## 1. Copy files to the board
 
 ```bash
+# "belabox" below is a placeholder - use your board's actual hostname/IP,
+# or an SSH config alias if you've set one up
 scp -r belabox-hotplug belabox:~/belabox-hotplug
 ```
 
@@ -107,6 +109,14 @@ sudo python3 bootstrap_token.py YOUR_BELAUI_PASSWORD
 This creates `/etc/belabox-hotplug/config.json` with your saved token. No
 further editing is required for a typical setup - USB and HDMI sources are
 both auto-detected.
+
+**Security note**: passing the password as a command-line argument means it
+will briefly be visible to anything else on the box that can read the
+process list (`ps aux`), and it'll land in your shell history unless you
+prefix the command with a space (bash: `HISTCONTROL=ignorespace`, or just
+edit it out of `~/.bash_history` afterward). This only matters for the one
+command above - after that, only the derived token is stored on disk, never
+the plaintext password.
 
 ## 4. Config reference
 

@@ -1,11 +1,12 @@
 [Unit]
-Description=Set fan to fixed speed at boot
+Description=Keep fan at a fixed speed (see fan-lock.sh)
 After=multi-user.target
 
 [Service]
-Type=oneshot
-ExecStart=/bin/bash -c 'echo user_space > /sys/class/thermal/thermal_zone0/policy && echo 2 > /sys/class/thermal/cooling_device0/cur_state'
-RemainAfterExit=yes
+Type=simple
+ExecStart=/usr/local/bin/fan-lock.sh
+Restart=on-failure
+RestartSec=5
 
 [Install]
 WantedBy=multi-user.target
