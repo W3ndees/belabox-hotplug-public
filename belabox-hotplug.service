@@ -1,0 +1,18 @@
+[Unit]
+Description=BELABOX capture device hotplug watcher
+After=network.target
+# Adjust this if your belaUI systemd unit has a different name -
+# check with: systemctl list-units | grep -i bela
+Wants=belaUI.service
+After=belaUI.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/python3 /opt/belabox-hotplug/belabox_hotplug.py
+Restart=always
+RestartSec=5
+User=root
+# Needs root (or the 'video'+'plugdev' groups) to read udev USB device info
+
+[Install]
+WantedBy=multi-user.target
