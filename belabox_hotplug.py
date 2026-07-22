@@ -74,7 +74,8 @@ class BelaUIClient:
         self.last_pipelines = {}
         self.is_streaming = False
         # belaUI's current list of audio source names (e.g. "HDMI",
-        # "DJIPocket3", "No audio"), broadcast in 'status' messages and
+        # the connected USB device's product name, "No audio"), broadcast
+        # in 'status' messages and
         # refreshed by belaUI itself on USB audio hotplug. Needed so
         # start_stream() can send the *correct* asrc for whichever source is
         # now active - see pick_asrc().
